@@ -1,0 +1,63 @@
+## PHASE 1 : DATA PREPROCESSING AND IMBALANCE HANDLING
+
+1. Data Preprocessing : The process of scrubbing, filtering, and preparing raw, messy data so that machine learning models can read it without crashing.
+
+In Our Project: Removed useless text columns like UPI account names and filtered out low-risk everyday merchant payments to keep data fast and clean.
+
+2. Feature Engineering / Encoding : Converting non-numeric data (like text words) into numbers, because computer algorithms can only calculate mathematical equations.
+
+In Our Project: Used LabelEncoder to change text categories like TRANSFER and CASH_OUT into numbers like 0 and 1.
+
+3. Class Imbalance : A problem where one category in dataset completely overpowers the other category, making the data highly unfair.
+
+In Our Project: We had over 2.2 million safe transactions but only 6,570 fraud cases. The data was heavily skewed toward safe transfers.
+
+4. SMOTE (Synthetic Minority Over-sampling Technique) : A smart algorithm that fixes data imbalance by creating brand-new, realistic examples of the rare category based on real mathematical patterns.
+
+In Our Project: Instead of just copying the same old fraud rows, SMOTE generated realistic synthetic fraud records to give a perfect 50-50 balanced training dataset.
+
+## PHASE 2 : TABULAR MODELING VIA STACKED ENSEMBLE ML
+
+1. Ensemble Learning : A method where you combine the predictions of multiple machine learning models (multiple "brains") to make one final, highly accurate decision.
+
+In Our Project: Instead of relying on just one algorithm, we used Random Forest and XGBoost together.
+
+2. Random Forest Classifier : An algorithm that creates dozens of independent "Decision Trees" (like a forest of guessing games) and takes the majority vote to find the answer.
+
+In Our Project: It acted highly stable model, by giving 67% Precision and causing very few false alarms for innocent customers.
+
+3. XGBoost (Extreme Gradient Boosting) : A powerful, lightning-fast algorithm that builds decision trees one after the other, where each new tree specifically focuses on fixing the mistakes made by the previous one.
+
+In Our Project: It acted as ultimate shield, catching a near-perfect 99% of all fraud cases.
+
+4. Precision vs. Recall :
+
+Precision: Out of all the times the AI rings the fraud alarm, how many times was it actually a real scammer? (Higher means fewer false alarms for normal users).
+
+Recall: Out of all the actual scammers hidden in the bank, what percentage did the AI successfully catch? (Higher means maximum safety against theft).
+
+In Our Project: XGBoost gave an incredible 99% Recall, meaning it missed almost zero thieves.
+
+## PHASE 3: RELATIONAL TOPOLOGY VIA GRAPH NEURAL NETWORKS (GNNs)
+
+1. Relational Topology : It is the study of how data points are connected and arranged in a network, rather than looking at them as single rows in an Excel sheet.
+
+In Our Project: Instead of looking at a single UPI transaction by itself, we look at the whole map of connections to see how money moves across multiple bank accounts.
+
+2. Graph Neural Networks (GNNs) : A type of Artificial Intelligence (AI) specifically built to analyze data that is structured as a network or a graph.
+
+In Our Project: Standard machine learning (like XGBoost) only looks at transaction amounts and timings. A GNN looks at the shapes of the connections to catch smart scammers who hide their money by passing it through 5 or 6 different accounts.
+
+3. Node (Vertex) : A single point or entity inside a network map.
+
+In Our Project: Every unique UPI Bank Account ID (nameOrig and nameDest) is a node. If Account A sends money to Account B, both accounts are individual nodes.
+
+4. Edge (Link) : The line or link that connects two nodes together. It represents a relationship.
+
+In Our Project: Every single UPI Transaction (money transfer) is an edge. The edge connects the sender node to the receiver node.
+
+5. Directed Graph (DiGraph): A network graph where the connections have a specific direction (they point from one node to another).
+
+In Our Project: Money always flows in a specific direction (from the Sender 
+ to the Receiver). Because direction matters in financial fraud tracking, we use a Directed Graph.
+
